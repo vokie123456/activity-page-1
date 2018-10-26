@@ -52,7 +52,7 @@ Vue.prototype.$mock = mock
 fastclick.attach(document.body)
 
 // 开发环境开启vConsole
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV !== 'production') {
   const vConsole = new VConsole()
   console.log(vConsole.version)
 }

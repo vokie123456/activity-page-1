@@ -75,7 +75,7 @@ export default {
     }, {
       text: '从注册玖富犇犇账户起，首笔从其他券商转入股票到玖富犇犇APP，按发起日当日的收盘价格计算到账股票的市值。兑换标准：1USD=7.75UKD'
     }, {
-      text: '此活动不与其他优惠活动同享。详情请联系客服<a  class="font-red link" href="tel:4008108818">400-8108818</a>转3或<a class="font-red link" href="tel:0755-36552261">0755-36552261</a>（快速服务通道）或关注微信公号“玖富国际”（i9fstock）咨询。'
+      text: '此活动不与其他优惠活动同享。详情请联系客服<a class="font-red link" href="tel:0755-36552261">0755-36552261</a>或关注微信公号“玖富国际”（i9fstock）咨询。'
     }, {
       text: `<lable class="label">活动奖励发放说明</lable>
       <p class="text">首次入金或转仓资金达到奖励发放标准后，可点击<span class="font-red link rewards" id="rewards">“查看活动奖励”</span></p>

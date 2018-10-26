@@ -3,10 +3,12 @@
        :class="{lock:showRule}">
     <!-- 头部内容 -->
     <div class="header">
-      <marquee-tips :list="tips"
-                    :speed="10"
+      <marquee-text :duration="30"
+                    :repeat="10"
                     v-if="tips.length"
-                    class="marquee"></marquee-tips>
+                    class="marquee">
+        <div v-html="tipsText"></div>
+      </marquee-text>
       <h1 class="logo">
         <img src="../../common/image/logo_@2x.png"
              width="185"
@@ -127,14 +129,20 @@ export default {
       eventId: '' // 验证码
     }
   },
+  computed: {
+    tipsText() {
+      return this.tips.map(item => this._hideNumber(item.phoneNum, item.activItemName)).join('')
+    }
+  },
   methods: {
     // 协议跳转
     handleDealClick() {
-      window.location.href = '/webstatic/page/user_agreement.html'
+      window.location.href = 'http://121.35.249.12:9003/webstatic/page/user_agreement.html'
     },
     // 点击登录
     handleLoginClick() {
-      this.$router.push({ path: '/accounts/login', query: { ...getParamObjFromUrl() } })
+      const query = getParamObjFromUrl()
+      this.$router.push({ path: '/accounts/login', query })
     },
     // 点击获取验证码
     handleGetCodeClick(phoneNum) {
@@ -159,6 +167,11 @@ export default {
         })
       })
     },
+    _hideNumber(phone, reward) {
+      phone = phone + ''
+      phone = `${phone.substr(0, 3)}****${phone.substr(7)}`
+      return `<span class="tip" style="margin-right:10px;display:inline-block">恭喜${phone}获得${reward}</span>`
+    },
     // 倒计时
     _countdown() {
       this.timeout--
@@ -168,7 +181,7 @@ export default {
         this.captchaTips = '获取验证码'
       }
     },
-    // 注册
+    // 点击注册注册
     async  handleRegistClick(obj) {
       const {
         channelId = 1,
@@ -178,14 +191,14 @@ export default {
         sourceCode = ''
       } = getParamObjFromUrl()
       const params = {
+        ...obj,
         invUserId,
         sourceCode,
         certType: 0,
         userSourceChannelId: channelId,
         regSourceType: utm_source,
         regSource: utm_medium,
-        eventId: this.eventId,
-        ...obj
+        eventId: this.eventId
       }
       try {
         const res = await register(params)
@@ -208,9 +221,7 @@ export default {
         const params = {}
         const res = await getRecordInfoIfeng(params)
         const data = res.result
-        this.$nextTick(() => {
-          this.tips = data
-        })
+        this.tips = data.reverse()
       } catch (err) {
         console.log('后台原始数据=====', err)
       }

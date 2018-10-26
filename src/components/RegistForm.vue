@@ -141,17 +141,15 @@ export default {
     .input
       flex 1
       height 80px
-      border-radius 40px
       overflow hidden
-      border 1px solid #f1a481
       font-size 26px
-      &:after
-        border-color transparent
-    &>>> .cube-input-field
+      border 1.5px solid #f1a481
       border-radius 40px
-      border-color #fff
-      height 100%
-      // box-shadow inset 1px 1px 0 1px rgba(247, 207, 178, 0.24)
+      &:after
+        border none
+    &>>> .cube-input-field
+      background-color transparent
+      overflow hidden
     .code-btn
       width 210px
       height 80px

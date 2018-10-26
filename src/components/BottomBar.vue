@@ -1,11 +1,10 @@
 <template>
-  <div class="bottom-bar">
+  <div class="bottom-bar" @click="handleLinkClick">
     <div class="left">
       <p class="name">玖富犇犇APP</p>
       <p class="slogan">玖富证券 让金融更简单</p>
     </div>
-    <span class="btn"
-          @click="handleLinkClick">
+    <span class="btn">
       打开
     </span>
   </div>
@@ -44,10 +43,12 @@ export default {
       content ''
     .slogan
       color #666
+      font-size 26px
   .btn
     bg-image('bg-btn', 130px, 60px)
     line-height 60px
     text-align center
+    font-size 32px
     color #fff
     &:active
       opacity 0.85

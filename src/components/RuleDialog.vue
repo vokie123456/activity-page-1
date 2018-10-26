@@ -27,16 +27,17 @@
           </scroll-view>
           <div v-else>
             <div class="table rewards-table">
-              <div v-if="!data.record">
+              <div v-if="record"
+                   class="noPrize">
                 暂无内容
               </div>
               <div v-else>
                 <div v-for="(item, index) in data.record"
                      :key="index"
-                     :class="{thead: index === 0, other: index !== 0}">
-                  <span>{{item.activItemName}}</span>
-                  <span>{{index === 0 ? '类型' : formartPrizeType(item.activeType)}}</span>
-                  <span>{{formartGetDate(index,item.confirmDate)}}</span>
+                     :class="{thead: index === 0, tbody: index !== 0}">
+                  <span class="item">{{item.activItemName}}</span>
+                  <span class="item">{{index === 0 ? '类型' : formartPrizeType(item.activeType)}}</span>
+                  <span class="item">{{formartGetDate(index,item.confirmDate)}}</span>
                 </div>
               </div>
             </div>
@@ -77,6 +78,11 @@ export default {
       default() {
         return {}
       }
+    }
+  },
+  computed: {
+    record() {
+      return this.data.record.length <= 1
     }
   },
   methods: {
@@ -160,13 +166,18 @@ export default {
       line-height 1.4
       .table
         border-collapse collapse
+        border-spacing 0
         margin-bottom 15px
         td, th
-          border 1px solid #d7d7d7
+          border 1.5px solid #d7d7d7
           padding 10px
           text-align center
+          font-size 26px
       .table
         margin 20px auto
+        .noPrize
+          font-size 26px
+          text-align center
         .thead
           display flex
           background #f1f1f1
@@ -175,9 +186,10 @@ export default {
             flex 1
             padding 10px
             text-align center
-        .other
+        .tbody
           display flex
-          span
+          font-size $font-size-medium
+          .item
             display block
             flex 1
             padding 10px
